@@ -1,27 +1,31 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Login from '../components/Login.vue'
+import Home from '../components/home.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+  { path: '/login', component: Login }, // 配置路由规则，如果用户访问 /login则跳转 Login 组件
+  { path: '/', redirect: '/login' }, // 配置路由规则，如果用户访问 / 则跳转 Login 组件
+  { path: '/home', component: Home }
 ]
 
 const router = new VueRouter({
   routes
 })
 
+// 挂载路由导航守卫
+router.beforeEach((to, from, next) => {
+  // to 将要访问的路径
+  // from 代表从哪个路径跳转而来
+  // next() 放行  next('/login') 强制跳转页面路径
+  if (to.path === '/login') return next() // 访问登录页面 放行
+  // 获取token
+  const tokenStr = window.sessionStorage.getItem('token')
+  if (tokenStr == null || tokenStr === '') return next('/login') // 没有token说明未登录，强制跳转登录页面
+  next() // 有token 放行
+})
+
+// 暴露路由对象
 export default router
