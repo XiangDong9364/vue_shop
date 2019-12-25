@@ -1,14 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../components/Login.vue'
-import Home from '../components/home.vue'
+import Home from '../components/Home.vue'
+import Other from '../components/Other.vue'
+import Users from '../components/user/Users.vue'
+import Orders from '../components/order/Orders.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   { path: '/login', component: Login }, // 配置路由规则，如果用户访问 /login则跳转 Login 组件
   { path: '/', redirect: '/login' }, // 配置路由规则，如果用户访问 / 则跳转 Login 组件
-  { path: '/home', component: Home }
+  {
+    path: '/home',
+    component: Home,
+    redirect: '/content',
+    children: [
+      { path: '/content', component: Other },
+      { path: '/users', component: Users },
+      { path: '/orders', component: Orders }
+    ]
+  }
 ]
 
 const router = new VueRouter({
