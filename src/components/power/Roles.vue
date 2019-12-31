@@ -43,7 +43,7 @@
                 <el-tag closable @close="tagClose(scope.row, item1.id)">{{ item1.authName}}</el-tag>
                 <i class="el-icon-caret-right"></i>
               </el-col>
-              <!-- 二级权限&&三级权限 -->
+              <!-- 二级权限 && 三级权限 -->
               <el-col :span="18">
                 <!-- 二级权限 -->
                 <el-row
