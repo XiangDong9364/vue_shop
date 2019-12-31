@@ -4,14 +4,20 @@
     <el-header>
       <div>
         <img src="../assets/panda_logo.jpg" alt="This is project logo" />
-        <span>电商后台管理系统</span>
+        <span>后台管理系统</span>
       </div>
-      <el-button type="success" @click="logout()">退出</el-button>
+      <el-tooltip :enterable="false" effect="dark" content="退出" placement="bottom">
+        <el-button icon="el-icon-switch-button" type="danger" circle @click="logout()"></el-button>
+      </el-tooltip>
     </el-header>
     <!-- 页面主体区域 -->
     <el-container>
       <!-- 侧边栏区域 -->
-      <el-aside width="200px">
+      <el-aside :width="isCollapse ? '200px' : '65px'">
+        <!-- 侧边栏控制区域 -->
+        <div class="asideController">
+          <el-switch v-model="isCollapse" @change="switchChange"></el-switch>
+        </div>
         <!-- 侧边栏菜单区域 -->
         <el-menu
           background-color="#2f444f"
@@ -20,6 +26,8 @@
           unique-opened
           router
           :default-active="$route.path"
+          :collapse="!isCollapse"
+          :collapse-transition="false"
         >
           <!-- 一级菜单 -->
           <el-submenu :index="item.id + ''" v-for="item in menulist" :key="item.id">
@@ -62,7 +70,9 @@
 export default {
   data () {
     return {
-      menulist: []
+      menulist: [],
+      // 是否折叠侧边栏
+      isCollapse: true
     }
   },
   created () {
@@ -79,6 +89,10 @@ export default {
       const { data: res } = await this.$http.get('menus')
       if (res.meta.status !== 200) return this.$message.error('获取菜单数据失败~！')
       this.menulist = res.data
+    },
+    // switch改变事件
+    switchChange: function (callback) {
+
     }
   }
 }
@@ -137,5 +151,22 @@ export default {
 
 .iconfont {
   margin-right: 8px;
+}
+
+// 开关按钮DIV层样式
+.asideController {
+  text-align: right;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+// 展开
+.asideOn {
+  width: 200px;
+}
+
+// 折叠
+.asizeOff {
+  width: 50px;
 }
 </style>
