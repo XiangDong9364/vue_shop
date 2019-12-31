@@ -97,7 +97,7 @@ export default {
 <style lang="less" scoped>
 .login_container {
   // background-color: #2b4b6b;
-  background: url('../assets/scana.jpg') no-repeat center center fixed;
+  background: url('../assets/scania (3).png') no-repeat center center fixed;
   background-size: cover;
   width: 100%;
   height: 100%;
