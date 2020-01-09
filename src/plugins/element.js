@@ -2,7 +2,7 @@ import Vue from 'vue'
 import {
   Button, Form, FormItem, Input, Message, Container, Header, Aside, Main, Footer, Menu, Submenu, MenuItemGroup, MenuItem,
   Breadcrumb, BreadcrumbItem, Card, Row, Col, Table, TableColumn, Switch, Tooltip, Pagination, Dialog, Select, Option,
-  MessageBox, Tag, Divider, Carousel, CarouselItem, Tree
+  MessageBox, Tag, Divider, Carousel, CarouselItem, Tree, Cascader, Alert, Tabs, TabPane
 } from 'element-ui'/* 按需导入组件 */
 
 /* 把组件注册为全局可用的组件 */
@@ -37,5 +37,9 @@ Vue.use(Divider)
 Vue.use(Carousel)
 Vue.use(CarouselItem)
 Vue.use(Tree)
+Vue.use(Cascader)
+Vue.use(Alert)
+Vue.use(Tabs)
+Vue.use(TabPane)
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
